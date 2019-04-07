@@ -1,0 +1,49 @@
+#!/bin/sh
+#--infobox
+#dialog --title "Message" --backtitle "Linux Shell Script tutorial" --infobox "This is the linux dialog box" 5 30 ;
+
+#--yesno
+<<COMMENT1
+dialog --title "Message" --backtitle "Linux shell scripting" --yesno "Do you want to exit ?" 5 40
+sel=$?
+case $sel in
+0) #echo "Yes is pressed to delete a file";;
+   dialog --title "Info" --msgbox "Yes is pressed to delete a file" 5 40;;
+1)echo "No is pressed not to delete a file";;
+255)echo "Escape key is pressed to cancel it";;
+esac 
+COMMENT1
+#--msgbox
+#dialog --title "Message" --msgbox "This is a short message for all the students" 10 40
+
+#input box
+<<COMMENT
+dialog --title "Age box" --inputbox "Enter your age" 10 30
+var=$?
+case $var in
+0) 
+if test $var -ge 18 
+then
+dialog --title "Message" --msgbox "You are eligible for voting " 10 40
+else
+dialog --title "Message" --msgbox "You are not eligible for voting " 8 40
+fi
+COMMENT
+#menu
+dialog --title "MAIN-MENU" --backtitle "[Up] [Down] [Enter]" --menu "Choose from below items" 15 50 3\
+Date/time "Show Date and Time"\
+Calender "To see calender"\
+Editor "To start Editor" 2>/tmp/menuitem.$$
+
+menuitem=`cat /tmp/menuitem.$$`
+opt=$?
+
+case $menuitem in 
+Date/time) date;;
+Calender) cal;;
+Editor) vi;;
+esac
+
+
+
+
